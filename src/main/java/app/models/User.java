@@ -1,5 +1,6 @@
 package app.models;
 
+import ch.qos.logback.core.joran.spi.DefaultClass;
 import org.hibernate.annotations.Check;
 
 import javax.persistence.*;
@@ -18,23 +19,47 @@ public class User {
     String id;
 
     @Column(name = "Uname", columnDefinition = "VARCHAR(50)", length = 50)
-    String name;
+    String name;//昵称
 
     @Column(name = "Usex", columnDefinition = "TINYINT", length = 1)
     @Check(constraints = "sex >=0 AND sex <= 1")
-    int sex;
+    int sex;//性别
 
-    @Column(name = "Uage", columnDefinition = "INT", length = 3)
-    int age;
+    @Column(name = "Uaddress", columnDefinition = "VARCHAR(200)", unique = true)
+    String address;
 
-    @Column(name = "Umail", columnDefinition = "VARCHAR(50)", length = 50)
+    @Column(name = "Umail", columnDefinition = "VARCHAR(50)")
     String mail;
 
-    public User(String name, int sex, int age, String mail) {
+    @Column(name = "Uqq", columnDefinition = "VARCHAR(50)")
+    String qq;
+
+    @Column(name = "Uphone", columnDefinition = "VARCHAR(11)")
+    String phone;
+
+    @Column(name = "Uusername", columnDefinition = "VARCHAR(50)", length = 50)
+    String username;//账户
+
+    @Column(name = "Upassword", columnDefinition = "VARCHAR(50)")
+    String password;//密码
+
+    public User() {
+    }
+
+    public User(String name, int sex, String address, String mail, String qq, String phone, String username, String password) {
         this.name = name;
         this.sex = sex;
-        this.age = age;
+        this.address = address;
         this.mail = mail;
+        this.qq = qq;
+        this.phone = phone;
+        this.username = username;
+        this.password = password;
+    }
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
     public String getId() {
@@ -61,12 +86,12 @@ public class User {
         this.sex = sex;
     }
 
-    public int getAge() {
-        return age;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getMail() {
@@ -77,14 +102,50 @@ public class User {
         this.mail = mail;
     }
 
+    public String getQq() {
+        return qq;
+    }
+
+    public void setQq(String qq) {
+        this.qq = qq;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", sex=" + sex +
-                ", age=" + age +
+                ", address='" + address + '\'' +
                 ", mail='" + mail + '\'' +
+                ", qq='" + qq + '\'' +
+                ", phone='" + phone + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
                 '}';
     }
 }
