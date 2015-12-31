@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class FindController {
 
-    @RequestMapping("/find/test/sssss")
+    @RequestMapping("/find/test/sssssss")
     public String test(){
         return "Connect success";
     }
